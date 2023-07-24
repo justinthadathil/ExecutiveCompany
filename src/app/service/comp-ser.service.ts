@@ -23,4 +23,8 @@ export class CompSerService {
     return this.http.post<executiveGroupModel>(`${this.getUrl}executives-groups`, body)
   }
 
+  putExecutiveGroup(body: executiveGroupModel){
+    return this.http.put<executiveGroupModel>(`${this.getUrl}executives-groups/${body.id}`, body)
+  }
+
 }

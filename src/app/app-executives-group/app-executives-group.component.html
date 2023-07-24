@@ -1,13 +1,15 @@
 <div class="row">
   <div class="col-12 col-md-4">
     <div class="form-group" [formGroup]="executiveGrpForm">
-      <label for="exampleExgp">Executive Group</label>
+      <label for="exampleExgp" class="marbot fon17">{{editData.name === '' ? 'New':'Edit'}} Executive Group</label>
       <input type="text" formControlName="exeGrpName" class="form-control" placeholder="Enter Executive Group name">
       <small *ngIf="executiveGrpForm.controls['exeGrpName'].hasError('required') && isSubmitted" class="form-text text-muted errorCode">The name of the group Cannot be blank.</small>
     </div>
   </div>
   <div class="col-12 col-md-3">
-    <button type="button" class="btn btn-secondary btnnew" (click)="submitValue()">Submit</button>
+    <button type="button" class="btn btn-secondary btnnew" (click)="submitValue()">
+      {{editData.name === '' ? 'Submit':'Update'}}
+    </button>
   </div>
 
   <div class="col-12">
@@ -27,6 +29,14 @@
           <th mat-header-cell *matHeaderCellDef> Name </th>
           <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
+        <ng-container matColumnDef="Actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let element">
+              <button mat-raised-button (click)="patchValue(element)" type="button" matTooltip="View Form" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                <i class="fas fa-edit"></i>
+              </button>
+          </td>
+      </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

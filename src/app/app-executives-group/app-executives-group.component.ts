@@ -19,8 +19,9 @@ export class AppExecutivesGroupComponent implements OnInit {
   executiveGrpForm: FormGroup;
   isSubmitted: Boolean = false;
 
-  displayedColumns: string[] = ['id', 'name'];
+  displayedColumns: string[] = ['id', 'name', 'Actions'];
   executiveGroupTable: any;
+  editData: executiveGroupModel = { id:0, name:'', version:0 }
 
   constructor(
     private CompSerService: CompSerService,
@@ -63,26 +64,50 @@ export class AppExecutivesGroupComponent implements OnInit {
       this.isSubmitted = true;
       return;
     }
-    let formValue = this.executiveGrpForm.value
-    let sendBody = {
-      "id": this.currentID,
-      "name": formValue.exeGrpName,
-      "version": 0
-    }
-    this.CompSerService.postExecutiveGroup(sendBody).subscribe((data) => {
-      if(typeof(data)){
-        this.message(data.name+' group added successfully')
-        this.getAllExecutiveGroup();
-      }else{
-        this.message('Something went wrong')
+    let formValue = this.executiveGrpForm.value;
+    if(this.editData.name === ''){
+      let postBody = {
+        "id": this.currentID,
+        "name": formValue.exeGrpName,
+        "version": 0
       }
-      this.resetForm();
-    });
+      this.CompSerService.postExecutiveGroup(postBody).subscribe((data) => {
+        this.responseProcess(data, 'added')
+      });
+    }else{
+      let putBody = {
+        "id": this.editData.id,
+        "name": formValue.exeGrpName,
+        "version": this.editData.version
+      }
+      this.CompSerService.putExecutiveGroup(putBody).subscribe((data) => {
+        this.responseProcess(data, 'updated')
+      });
+    }
+  }
+
+  responseProcess(data: executiveGroupModel, type:string){
+    if(typeof(data) === 'object'){
+      this.message(`${data.name} group ${type} successfully`)
+      this.getAllExecutiveGroup();
+    }else{
+      this.message('Something went wrong')
+    }
+    this.resetForm();
+  }
+
+  patchValue(data: executiveGroupModel){
+    console.log(data)
+    this.editData = data
+    this.executiveGrpForm.patchValue({
+      exeGrpName: data.name
+    })
   }
 
   resetForm(){
     this.executiveGrpForm.reset();
     this.isSubmitted = false;
+    this.editData.name = ''
   }
 
   message(message: string){
@@ -104,7 +129,7 @@ export class AppExecutivesGroupComponent implements OnInit {
     let height: number;
     window.onresize = () => { };
     height = window.innerHeight;
-    return Math.round(height - 400)
+    return Math.round(height - 300)
   }
 
 }
