@@ -5,10 +5,20 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AppExecutivesGroupComponent } from './app-executives-group/app-executives-group.component';
 import { AppSidenavComponent } from './app-sidenav/app-sidenav.component';
 import { AppExecutivesComponent } from './app-executives/app-executives.component';
 import { AppBaseComponent } from './app-base/app-base.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTableModule} from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -22,7 +32,15 @@ import { AppBaseComponent } from './app-base/app-base.component';
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

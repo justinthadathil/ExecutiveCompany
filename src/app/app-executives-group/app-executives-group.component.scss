@@ -1,0 +1,28 @@
+.tablecontainer {
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.search{
+  text-align: end;
+}
+
+.btnnew{
+  position: relative;
+  top: 19px;
+}
+
+.mat-mdc-table {
+  background: #253238 !important;
+}
+
+::ng-deep {
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: #253238 !important;
+  }
+}
+
+
