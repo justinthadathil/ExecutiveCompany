@@ -14,7 +14,7 @@ export interface executiveModel {
   postTitle: string
   salutation: string
   jobTitle: string
-  officeId: number
+  officeId: string
   version: number
   executiveGroup: executiveGroupModel
 }

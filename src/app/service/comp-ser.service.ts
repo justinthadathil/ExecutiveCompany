@@ -19,16 +19,24 @@ export class CompSerService {
     return this.http.get<executiveGroupModel[]>(`${this.getUrl}executives-groups`)
   }
 
-  postExecutiveGroup(body: executiveGroupModel){
+  postExecutiveGroup(body: executiveGroupModel): Observable<executiveGroupModel>{
     return this.http.post<executiveGroupModel>(`${this.getUrl}executives-groups`, body)
   }
 
-  putExecutiveGroup(body: executiveGroupModel){
+  putExecutiveGroup(body: executiveGroupModel): Observable<executiveGroupModel>{
     return this.http.put<executiveGroupModel>(`${this.getUrl}executives-groups/${body.id}`, body)
   }
 
   getExecutive(): Observable<executiveModel[]>{
     return this.http.get<executiveModel[]>(`${this.getUrl}executives`)
+  }
+
+  postExecutive(body: executiveModel): Observable<executiveModel>{
+    return this.http.post<executiveModel>(`${this.getUrl}executives`, body)
+  }
+
+  putExecutive(body: executiveModel): Observable<executiveModel>{
+    return this.http.put<executiveModel>(`${this.getUrl}executives/${body.id}`, body)
   }
 
 }

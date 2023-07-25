@@ -1,6 +1,7 @@
 <div class="row" [formGroup]="executiveForm">
-  <div class="col-12 col-md-3">
-    <mat-form-field>
+  <label for="exampleExgp" class="marbot fon17">{{formEdit ? 'Edit':'New'}} Executive Group</label>
+  <div class="col-12 col-md-4">
+    <mat-form-field class="widthmax">
       <mat-label>Prefix</mat-label>
       <input type="text" matInput formControlName="prefix" [matAutocomplete]="auto" placeholder="Select or free text">
       <mat-autocomplete #auto="matAutocomplete">
@@ -12,43 +13,122 @@
     </mat-form-field>
   </div>
 
-  <div class="col-12 col-md-3">
-    <mat-form-field>
+  <div class="col-12 col-md-4">
+    <mat-form-field class="widthmax">
       <mat-label>First Name</mat-label>
       <input matInput formControlName="firstName" placeholder="Enter first name">
       <mat-error *ngIf="executiveForm.controls['firstName'].hasError('maxlength')">{{getErrorMessageNum(30)}}</mat-error>
     </mat-form-field>
   </div>
 
-  <div class="col-12 col-md-3">
-    <mat-form-field>
+  <div class="col-12 col-md-4">
+    <mat-form-field class="widthmax">
       <mat-label>Last Name</mat-label>
       <input matInput formControlName="lastName" placeholder="Enter last name">
       <mat-error *ngIf="executiveForm.controls['lastName'].hasError('maxlength')">{{getErrorMessageNum(30)}}</mat-error>
     </mat-form-field>
   </div>
 
-  <div class="col-12 col-md-3">
-    <mat-form-field>
+  <div class="col-12 col-md-4">
+    <mat-form-field class="widthmax">
       <mat-label>Middle Name Initials</mat-label>
       <input matInput formControlName="initials" placeholder="Enter initials">
       <mat-error *ngIf="executiveForm.controls['initials'].hasError('maxlength')">{{getErrorMessageNum(10)}}</mat-error>
     </mat-form-field>
   </div>
 
-  <div class="col-12 col-md-3">
-    <mat-form-field>
+  <div class="col-12 col-md-4">
+    <mat-form-field class="widthmax">
       <mat-label>Job Title</mat-label>
       <input matInput formControlName="jonTitle" placeholder="Enter Job Title">
       <mat-error *ngIf="executiveForm.controls['jonTitle'].hasError('maxlength')">{{getErrorMessageNum(100)}}</mat-error>
     </mat-form-field>
   </div>
 
+  <div class="col-12 col-md-4">
+    <mat-form-field class="widthmax">
+      <mat-label>Executive Group</mat-label>
+      <mat-select formControlName="group">
+        <mat-option *ngFor="let exe of executiveGroupOption" [value]="exe.id">
+          {{exe.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="executiveForm.controls['group'].hasError('required') && isSubmitted">{{getErrorMessageReq('Executive Group')}}</mat-error>
+    </mat-form-field>
+  </div>
 
-
-  <div class="col-12 col-md-3">
+  <div class="col-12 col-md-2">
     <button type="button" class="btn btn-secondary btnnew" (click)="submitValue()">
-      Submit
+      {{formEdit ? 'Update':'Submit'}}
     </button>
+  </div>
+
+  <div class="col-12 col-md-2" *ngIf="formEdit">
+    <button type="button" class="btn btn-secondary btnnew" (click)="resetForm()">
+      Clear
+    </button>
+  </div>
+</div>
+
+<div class="row martop">
+  <div class="col-12 col-md-7 mar0">
+    <h1 for="exampleExgp">Executive Groups - {{executiveTable?.data.length}}</h1>
+  </div>
+  <div class="col-12 col-md-5 end">
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="searchFilter($event)" placeholder="Search by any value" #input>
+    </mat-form-field>
+  </div>
+
+  <mat-spinner *ngIf="loading"></mat-spinner>
+  <div *ngIf="!loading" class="col-12">
+    <div class="tablecontainer" [style.height.px]="getHeight()">
+      <table mat-table [dataSource]="executiveTable" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID. </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Title. </th>
+          <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef> First Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef> Last Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="executiveGroup">
+          <th mat-header-cell *matHeaderCellDef> Executive Group </th>
+          <td mat-cell *matCellDef="let element"> {{element.executiveGroup.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let element">
+              <button mat-raised-button (click)="patchValue(element)" type="button" matTooltip="View Form" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                <i class="fas fa-edit"></i>
+              </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+    </div>
+
+
   </div>
 </div>

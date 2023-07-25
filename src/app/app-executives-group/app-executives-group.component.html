@@ -24,7 +24,8 @@
 
 
   <div class="col-12">
-    <div class="tablecontainer" [style.height.px]="getHeight()">
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <div *ngIf="!loading" class="tablecontainer" [style.height.px]="getHeight()">
       <table mat-table [dataSource]="executiveGroupTable" class="mat-elevation-z8">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> No. </th>

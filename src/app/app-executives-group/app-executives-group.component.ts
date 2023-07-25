@@ -3,7 +3,7 @@ import { CompSerService } from '../service/comp-ser.service';
 import { executiveGroupModel } from '../shared/company';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableDataSource, _MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-app-executives-group',
@@ -11,7 +11,6 @@ import { MatTableDataSource, _MatTableDataSource } from '@angular/material/table
   styleUrls: ['./app-executives-group.component.scss']
 })
 export class AppExecutivesGroupComponent implements OnInit {
-
 
   loading: boolean = true;
   currentID: number = 0;
@@ -46,7 +45,6 @@ export class AppExecutivesGroupComponent implements OnInit {
         this.executiveGroupTable = new MatTableDataSource(initalValue);
         this.currentID = initalValue.length === 0 ? 0 : this.generateID() + 1;
         this.loading = false;
-        console.log(this.executiveGroupTable.data)
       },
     })
   }
@@ -89,8 +87,7 @@ export class AppExecutivesGroupComponent implements OnInit {
   }
 
   patchValue(data: executiveGroupModel){
-    console.log(data)
-    this.editData = data
+    this.editData = data;
     this.executiveGrpForm.patchValue({
       exeGrpName: data.name
     })
@@ -121,7 +118,7 @@ export class AppExecutivesGroupComponent implements OnInit {
     let height: number;
     window.onresize = () => { };
     height = window.innerHeight;
-    return Math.round(height - 300)
+    return Math.round(height - 500)
   }
 
   getexeGrpForm(){
