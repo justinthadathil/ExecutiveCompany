@@ -31,13 +31,6 @@ export class AppExecutivesGroupComponent implements OnInit {
     this.getexeGrpForm();
   }
 
-  getexeGrpForm(){
-    this.executiveGrpForm = this.formBuilder.group({
-      exeGrpName: ['', [Validators.required]],
-    });
-  }
-
-
   ngOnInit(): void {
     this.getAllExecutiveGroup()
     this.getHeight()
@@ -130,6 +123,12 @@ export class AppExecutivesGroupComponent implements OnInit {
     window.onresize = () => { };
     height = window.innerHeight;
     return Math.round(height - 300)
+  }
+
+  getexeGrpForm(){
+    this.executiveGrpForm = this.formBuilder.group({
+      exeGrpName: ['', [Validators.required, Validators.maxLength(25)]],
+    });
   }
 
 }

@@ -6,13 +6,12 @@ table {
   width: 100%;
 }
 
-.search{
+.end{
   text-align: end;
 }
 
 .btnnew{
-  position: relative;
-  top: 25px;
+  margin: 25px 0px 25px;
 }
 
 .mat-mdc-table {
@@ -35,4 +34,8 @@ table {
 
 .fon17{
   font-size: 17px;
+}
+
+.mar0{
+  margin: auto 0;
 }

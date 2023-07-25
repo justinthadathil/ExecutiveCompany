@@ -19,6 +19,11 @@
       "id": 4,
       "name": "Directors & Others",
       "version": 0
+    },
+    {
+      "id": 5,
+      "name": "Information",
+      "version": 0
     }
   ],
   "executives": [

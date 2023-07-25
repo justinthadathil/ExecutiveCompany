@@ -3,7 +3,8 @@
     <div class="form-group" [formGroup]="executiveGrpForm">
       <label for="exampleExgp" class="marbot fon17">{{editData.name === '' ? 'New':'Edit'}} Executive Group</label>
       <input type="text" formControlName="exeGrpName" class="form-control" placeholder="Enter Executive Group name">
-      <small *ngIf="executiveGrpForm.controls['exeGrpName'].hasError('required') && isSubmitted" class="form-text text-muted errorCode">The name of the group Cannot be blank.</small>
+      <span *ngIf="executiveGrpForm.controls['exeGrpName'].hasError('required') && isSubmitted" class="form-text text-muted errorCode">The name of the group cannot be blank.</span>
+      <span *ngIf="executiveGrpForm.controls['exeGrpName'].hasError('maxlength')" class="form-text text-muted errorCode">Name should not be more than 50 characters.</span>
     </div>
   </div>
   <div class="col-12 col-md-3">
@@ -11,14 +12,21 @@
       {{editData.name === '' ? 'Submit':'Update'}}
     </button>
   </div>
+  <div class="col-12 col-md-7 mar0">
+    <h1 for="exampleExgp">Executive Groups - {{executiveGroupTable?.data.length}}</h1>
+  </div>
+  <div class="col-12 col-md-5 end">
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="searchFilter($event)" placeholder="ID or Name" #input>
+    </mat-form-field>
+  </div>
+
 
   <div class="col-12">
-    <div class="search">
-      <mat-form-field>
-        <mat-label>Search</mat-label>
-        <input matInput (keyup)="searchFilter($event)" placeholder="Ex. ium" #input>
-      </mat-form-field>
-    </div>
+    <!-- <div class="search">
+
+    </div> -->
     <div class="tablecontainer" [style.height.px]="getHeight()">
       <table mat-table [dataSource]="executiveGroupTable" class="mat-elevation-z8">
         <ng-container matColumnDef="id">
