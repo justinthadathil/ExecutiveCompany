@@ -1,1 +1,54 @@
-<p>app-executives works!</p>
+<div class="row" [formGroup]="executiveForm">
+  <div class="col-12 col-md-3">
+    <mat-form-field>
+      <mat-label>Prefix</mat-label>
+      <input type="text" matInput formControlName="prefix" [matAutocomplete]="auto" placeholder="Select or free text">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="executiveForm.controls['prefix'].hasError('maxlength')">{{getErrorMessageNum(20)}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="col-12 col-md-3">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" placeholder="Enter first name">
+      <mat-error *ngIf="executiveForm.controls['firstName'].hasError('maxlength')">{{getErrorMessageNum(30)}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="col-12 col-md-3">
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" placeholder="Enter last name">
+      <mat-error *ngIf="executiveForm.controls['lastName'].hasError('maxlength')">{{getErrorMessageNum(30)}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="col-12 col-md-3">
+    <mat-form-field>
+      <mat-label>Middle Name Initials</mat-label>
+      <input matInput formControlName="initials" placeholder="Enter initials">
+      <mat-error *ngIf="executiveForm.controls['initials'].hasError('maxlength')">{{getErrorMessageNum(10)}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="col-12 col-md-3">
+    <mat-form-field>
+      <mat-label>Job Title</mat-label>
+      <input matInput formControlName="jonTitle" placeholder="Enter Job Title">
+      <mat-error *ngIf="executiveForm.controls['jonTitle'].hasError('maxlength')">{{getErrorMessageNum(100)}}</mat-error>
+    </mat-form-field>
+  </div>
+
+
+
+  <div class="col-12 col-md-3">
+    <button type="button" class="btn btn-secondary btnnew" (click)="submitValue()">
+      Submit
+    </button>
+  </div>
+</div>

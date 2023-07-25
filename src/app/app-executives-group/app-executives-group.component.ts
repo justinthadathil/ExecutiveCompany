@@ -3,8 +3,7 @@ import { CompSerService } from '../service/comp-ser.service';
 import { executiveGroupModel } from '../shared/company';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-import {MatTableDataSource, _MatTableDataSource} from '@angular/material/table';
+import { MatTableDataSource, _MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-app-executives-group',

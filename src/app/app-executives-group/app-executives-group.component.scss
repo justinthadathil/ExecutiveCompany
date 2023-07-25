@@ -18,12 +18,6 @@ table {
   background: #253238 !important;
 }
 
-::ng-deep {
-  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-    background-color: #253238 !important;
-  }
-}
-
 .marbot{
   margin-bottom: 6px;
 }
