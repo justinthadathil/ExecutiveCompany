@@ -118,7 +118,7 @@ export class AppExecutivesGroupComponent implements OnInit {
     let height: number;
     window.onresize = () => { };
     height = window.innerHeight;
-    return Math.round(height - 500)
+    return Math.round(height - 300)
   }
 
   getexeGrpForm(){

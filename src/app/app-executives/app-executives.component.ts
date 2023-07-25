@@ -203,7 +203,7 @@ export class AppExecutivesComponent implements OnInit {
     let height: number;
     window.onresize = () => { };
     height = window.innerHeight;
-    return Math.round(height - 300)
+    return Math.round(height - 400)
   }
 
 }
